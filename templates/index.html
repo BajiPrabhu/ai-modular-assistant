@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Assistant</title>
+</head>
+<body>
+    <h1>AI Modular Assistant</h1>
+
+    <button onclick="listen()">🎤 Speak</button>
+    <button onclick="testSpeak()">🔊 Test Speak</button>
+
+    <p id="output"></p>
+
+<script>
+function listen() {
+    fetch('/listen')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("output").innerText = data.recognized_text;
+    });
+}
+
+function testSpeak() {
+    fetch('/speak', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text: "Hello Shubham, your assistant is working."})
+    });
+}
+</script>
+
+</body>
+</html>
