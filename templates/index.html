@@ -16,7 +16,9 @@ function listen() {
     fetch('/listen')
     .then(response => response.json())
     .then(data => {
-        document.getElementById("output").innerText = data.recognized_text;
+        document.getElementById("output").innerText =
+            "You: " + data.recognized_text +
+            "\nAssistant: " + data.assistant_response;
     });
 }
 

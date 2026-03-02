@@ -15,10 +15,17 @@ def speak_route():
     speak(text)
     return jsonify({"status": "spoken", "text": text})
 
+from core.router import handle_command
+
 @app.route("/listen", methods=["GET"])
 def listen_route():
     text = listen()
-    return jsonify({"recognized_text": text})
+    response = handle_command(text)
+    speak(response)
+    return jsonify({
+        "recognized_text": text,
+        "assistant_response": response
+    })
 
 if __name__ == "__main__":
     app.run(debug=False)
